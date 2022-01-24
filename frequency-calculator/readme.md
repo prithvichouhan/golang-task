@@ -8,7 +8,7 @@ If you dont have a docker, docker-compose setup -
 
 Install docker and docker-compose
 
-Clone this project 
+Clone this repository and install all dependencies.
 
 ```bash
 cd golang-task

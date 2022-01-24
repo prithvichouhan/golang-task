@@ -1,7 +1,7 @@
 # 
 
 ## Description
-Script that reads text from a file, calls frequency-calculator service and gets top 10 word occurrences in text.
+Create script that reads text from a file, calls frequency-calculator service and gets top 10 word occurrences in text.
 
 ## Installation
 If you dont have a Golang setup, install go and setup the environment: 
@@ -15,7 +15,7 @@ export GOPATH=path/to/go/working/directory
 export PATH=$PATH:$GOPATH/bin
 ```
 
-Clone this project and install all project dependencies.
+Clone this repository and install all project dependencies.
 
 ```bash
 cd golang-task
