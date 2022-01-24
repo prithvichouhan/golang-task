@@ -12,6 +12,7 @@ import (
 	"github.com/joho/godotenv"
 )
 
+// Init
 func init() {
 	err := godotenv.Load(".env")
 
@@ -20,6 +21,7 @@ func init() {
 	}
 }
 
+// Function to initialize router
 func initializeRouter() {
 	r := mux.NewRouter()
 
@@ -29,6 +31,7 @@ func initializeRouter() {
 	log.Fatal("Server has stopped", http.ListenAndServe(fmt.Sprintf(":%s", os.Getenv("PORT")), r))
 }
 
+// Function main
 func main() {
 	initializeRouter()
 }
