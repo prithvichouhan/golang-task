@@ -11,7 +11,9 @@ Install docker and docker-compose
 Clone this project 
 
 ```bash
+cd golang-task
 cd frequency-calculator/
+go mod download
 ```
 
 ## Usage
