@@ -18,3 +18,11 @@ func validateInput(input string) (string, error) {
 
 	return input, nil
 }
+
+// Function to set header
+func printHeader(w http.ResponseWriter, code int, result interface{}) {
+	w.Header().Set("content-type", "application/json")
+	w.WriteHeader(code)
+	post, _ := json.Marshal(result)
+	fmt.Fprintf(w, "%v", string(post))
+}
