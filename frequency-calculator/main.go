@@ -23,8 +23,10 @@ func init() {
 func initializeRouter() {
 	r := mux.NewRouter()
 
-	log.Fatal("Stopped ", http.ListenAndServe(":4000", r))
+	r.HandleFunc("/api/v1/wordsCount", handler.CalculateWordsFrequency).Methods("POST")
 
+	log.Printf("Server listening on port: %s", os.Getenv("PORT"))
+	log.Fatal("Server has stopped", http.ListenAndServe(fmt.Sprintf(":%s", os.Getenv("PORT")), r))
 }
 
 func main() {
