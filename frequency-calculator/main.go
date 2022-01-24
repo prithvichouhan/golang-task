@@ -25,7 +25,7 @@ func init() {
 func initializeRouter() {
 	r := mux.NewRouter()
 
-	r.HandleFunc("/api/v1/wordsCount", handler.CalculateWordsFrequency).Methods("POST")
+	r.HandleFunc("/api/v1/wordsCount", handler.GetWordCounts).Methods("POST")
 
 	log.Printf("Server listening on port: %s", os.Getenv("PORT"))
 	log.Fatal("Server has stopped", http.ListenAndServe(fmt.Sprintf(":%s", os.Getenv("PORT")), r))

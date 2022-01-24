@@ -37,11 +37,10 @@ func printHeader(w http.ResponseWriter, code int, result interface{}) {
 	fmt.Fprintf(w, "%v", string(post))
 }
 
-// Function to calculate input words frequency
-func CalculateWordsFrequency(w http.ResponseWriter, r *http.Request) {
+// Function to get word count
+func GetWordCounts(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	var body request
-	var topTenEle []wordFrequency
 	_ = json.NewDecoder(r.Body).Decode(&body)
 
 	_, err := validateInput(body.Input)
@@ -49,6 +48,11 @@ func CalculateWordsFrequency(w http.ResponseWriter, r *http.Request) {
 		printHeader(w, http.StatusBadRequest, err)
 		return
 	}
+
+	result := sortElements(parseInputContent(body.Input))
+
+	json.NewEncoder(w).Encode(result)
+}
 
 // Function to parse input string
 func parseInputContent(fileContents string) map[string]int {
@@ -59,22 +63,29 @@ func parseInputContent(fileContents string) map[string]int {
 		if re.MatchString(word) {
 			if val, found := wordMap[word]; found {
 				wordMap[word] = val + 1
-		} else {
+			} else {
 				wordMap[word] = 1
-		}
+			}
 		}
 	}
 
 	return wordMap
+}
+
+// Funcion to sort the elements
+func sortElements(wordsMap map[string]int) []wordFrequency {
+	var sortSlice []wordFrequency
+	for k, v := range wordsMap {
+		sortSlice = append(sortSlice, wordFrequency{k, v})
 	}
 
-	sort.Slice(topTenEle, func(i, j int) bool {
-		return topTenEle[i].Frequency > topTenEle[j].Frequency
+	sort.Slice(sortSlice, func(i int, j int) bool {
+		return sortSlice[i].Frequency > sortSlice[j].Frequency
 	})
 
-	if len(topTenEle) > 10 {
-		topTenEle = topTenEle[:10]
+	if len(sortSlice) > 10 {
+		sortSlice = sortSlice[:10]
 	}
 
-	json.NewEncoder(w).Encode(topTenEle)
+	return sortSlice
 }
