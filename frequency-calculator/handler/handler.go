@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"regexp"
 	"sort"
 	"strings"
 
@@ -49,20 +50,22 @@ func CalculateWordsFrequency(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	input := strings.Fields(body.Input)
+// Function to parse input string
+func parseInputContent(fileContents string) map[string]int {
+	re := regexp.MustCompile(`(?m)[\pL_]`)
+	wCol := strings.Split(string(fileContents), " ")
 	wordMap := make(map[string]int)
-
-	for _, v := range input {
-		_, ok := wordMap[v]
-		if ok {
-			wordMap[v] += 1
+	for _, word := range wCol {
+		if re.MatchString(word) {
+			if val, found := wordMap[word]; found {
+				wordMap[word] = val + 1
 		} else {
-			wordMap[v] = 1
+				wordMap[word] = 1
+		}
 		}
 	}
 
-	for k, v := range wordMap {
-		topTenEle = append(topTenEle, wordFrequency{k, v})
+	return wordMap
 	}
 
 	sort.Slice(topTenEle, func(i, j int) bool {
