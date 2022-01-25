@@ -1,7 +1,8 @@
-# Frequency Calculator
+# FREQUENCY CALCULATOR
+
 
 ## Description
-Server that accepts input as text and provides Json Output as Top ten most used words and times of occurrence in the text.
+Server that accepts input as text and provides Json Output containing the top ten most used words and times of occurrence in the text.
 
 ## Installation
 If you dont have a docker, docker-compose setup - 
@@ -11,7 +12,7 @@ Install docker and docker-compose
 Clone this repository and install all dependencies.
 
 ```bash
-cd golang-task
+cd golang-task/
 cd frequency-calculator/
 go mod download
 ```
@@ -31,7 +32,8 @@ go run main.go or sudo docker-compose up
 
 ## REST API ENDPOINT
 
-Get occurrences of top 10 words in text.
+## POST api/v1/wordsCount
+> Get occurrences of top 10 words in text.
 
 ```
 Request :
@@ -44,8 +46,49 @@ Body (Content-Type application/json):
 ```
 ```
 Response :
-[{"Word":"in","Frequency":3},{"Word":"dolor","Frequency":2},{"Word":"dolore","Frequency":2},{"Word":"ut","Frequency":2},{"Word":"non","Frequency":1},{"Word":"reprehenderit","Frequency":1},{"Word":"Duis","Frequency":1},{"Word":"nisi","Frequency":1},{"Word":"irure","Frequency":1},{"Word":"commodo","Frequency":1}]
+[
+  {
+    "Word": "in",
+    "Frequency": 3
+  },
+  {
+    "Word": "dolor",
+    "Frequency": 2
+  },
+  {
+    "Word": "dolore",
+    "Frequency": 2
+  },
+  {
+    "Word": "ut",
+    "Frequency": 2
+  },
+  {
+    "Word": "non",
+    "Frequency": 1
+  },
+  {
+    "Word": "reprehenderit",
+    "Frequency": 1
+  },
+  {
+    "Word": "Duis",
+    "Frequency": 1
+  },
+  {
+    "Word": "nisi",
+    "Frequency": 1
+  },
+  {
+    "Word": "irure",
+    "Frequency": 1
+  },
+  {
+    "Word": "commodo",
+    "Frequency": 1
+  }
+]
 ```
 
-## Licence
+## License
 [![MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
